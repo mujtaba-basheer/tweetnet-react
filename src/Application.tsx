@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 const Application = () => {
-  const [authUrl, setAuthUrl] = useState("");
-  const getAuthUrl = () => {
-    fetch(`${process.env.REACT_APP_BASE_URL}/authorize`)
-      .then((res) => res.json())
-      .then(({ data }) => {
-        console.log(data);
-        setAuthUrl(data);
-      })
-      .catch((err) => console.error(err));
-  };
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(`${process.env.REACT_APP_BASE_URL}/authorize`);
-    getAuthUrl();
-  }, []);
+    const code = searchParams.get("code");
+    console.log(searchParams.toString());
+    if (!code) {
+      navigate("/login");
+    }
+  }, [searchParams, navigate]);
 
   return (
     <div className="container">
-      <a className="login-btn" href={authUrl} rel="noreferrer" target="_blank">
-        Log In
-      </a>
+      <h1>Welcome!</h1>
     </div>
   );
 };
