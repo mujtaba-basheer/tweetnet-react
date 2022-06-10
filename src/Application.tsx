@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Application = () => {
+  const [authUrl, setAuthUrl] = useState("");
+  const getAuthUrl = () => {
+    fetch(`${process.env.REACT_APP_BASE_URL}/authorize`)
+      .then((res) => res.json())
+      .then(({ data }) => {
+        console.log(data);
+        setAuthUrl(data);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    console.log(`${process.env.REACT_APP_BASE_URL}/authorize`);
+    getAuthUrl();
+  }, []);
+
   return (
-    <div>
-      <a
-        href="https://api.twitter.com/oauth/request_token"
-        rel="noreferrer"
-        target="_blank"
-      >
+    <div className="container">
+      <a className="login-btn" href={authUrl} rel="noreferrer" target="_blank">
         Log In
       </a>
     </div>

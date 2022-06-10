@@ -6,6 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npx netlify deploy --dir=build --prod",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
+    "netlify-cli": "^10.5.0",
     "node-sass": "^7.0.1",
     "typescript": "^4.7.3"
   },
