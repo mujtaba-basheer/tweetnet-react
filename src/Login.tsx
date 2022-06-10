@@ -6,7 +6,6 @@ const Login = () => {
     fetch(`${process.env.REACT_APP_BASE_URL}/authorize`)
       .then((res) => res.json())
       .then(({ data }) => {
-        console.log(data);
         setAuthUrl(data);
       })
       .catch((err) => console.error(err));
@@ -18,7 +17,7 @@ const Login = () => {
 
   return (
     <div className="container">
-      <a className="login-btn" href={authUrl} rel="noreferrer" target="_blank">
+      <a className="login-btn" href={authUrl}>
         Log In
       </a>
     </div>

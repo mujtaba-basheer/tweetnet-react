@@ -1,15 +1,25 @@
 import React, { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
-const Application = () => {
+const Callback = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     const code = searchParams.get("code");
-    console.log(searchParams.toString());
     if (!code) {
       navigate("/login");
+    } else {
+      fetch(`${process.env.REACT_APP_BASE_URL}/token`, {
+        method: "POST",
+        body: JSON.stringify({ code }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then(({ data }) => console.log(data))
+        .catch((err) => console.error(err));
     }
   }, [searchParams, navigate]);
 
@@ -20,4 +30,4 @@ const Application = () => {
   );
 };
 
-export default Application;
+export default Callback;
