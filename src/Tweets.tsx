@@ -71,15 +71,14 @@ const Tweets = () => {
     if (!token) return null;
 
     try {
-      const userId = params.id;
-      const req = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/like/${userId}`,
-        {
-          method: "POST",
-          headers: { Authorization: token },
-          body: JSON.stringify({ tweet_id: tweetId }),
-        }
-      );
+      const req = await fetch(`${process.env.REACT_APP_BASE_URL}/like`, {
+        method: "POST",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tweet_id: tweetId }),
+      });
 
       const { status, data } = (await req.json()) as LikeApiResp;
       if (status && data.data.liked) window.alert("Tweet Liked!");
@@ -92,15 +91,14 @@ const Tweets = () => {
     if (!token) return null;
 
     try {
-      const userId = params.id;
-      const req = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/retweet/${userId}`,
-        {
-          method: "POST",
-          headers: { Authorization: token },
-          body: JSON.stringify({ tweet_id: tweetId }),
-        }
-      );
+      const req = await fetch(`${process.env.REACT_APP_BASE_URL}/retweet`, {
+        method: "POST",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tweet_id: tweetId }),
+      });
 
       const { status, data } = (await req.json()) as RetweetApiResp;
       if (status && data.data.retweeted) window.alert("Tweet Retweeted!");
