@@ -18,14 +18,17 @@ const Callback = () => {
         },
       })
         .then((res) => res.json())
-        .then(({ data }) => console.log(data))
+        .then(({ data }) => {
+          sessionStorage.setItem("token", JSON.stringify(data));
+          navigate("/following");
+        })
         .catch((err) => console.error(err));
     }
   }, [searchParams, navigate]);
 
   return (
     <div className="container">
-      <h1>Welcome!</h1>
+      <h1>Redirecting to Following...</h1>
     </div>
   );
 };

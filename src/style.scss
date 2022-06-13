@@ -5,6 +5,9 @@ body,
 * {
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
   min-height: 100vh;
 }
 
@@ -19,4 +22,38 @@ a.login-btn {
   padding: 1em 1.75em;
   color: white;
   font-weight: 600;
+}
+
+div.users-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+
+  &__item {
+    width: min-content;
+    outline: 1px solid black;
+    display: grid;
+    grid-template-columns: 300px min-content;
+    padding: 0.75em 1.25em;
+    border-radius: 4px;
+    align-items: center;
+
+    & h2 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    & h3 {
+      font-size: 15px;
+      color: rgb(83, 100, 113);
+    }
+    & button {
+      font-size: 15px;
+      font-weight: 700;
+      min-height: 36px;
+      padding: 0 1em;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+    }
+  }
 }
