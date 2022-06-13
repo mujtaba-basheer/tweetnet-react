@@ -20,7 +20,7 @@ const Callback = () => {
         .then((res) => res.json())
         .then(({ data }) => {
           sessionStorage.setItem("token", JSON.stringify(data));
-          navigate("/following");
+          navigate("/follows");
         })
         .catch((err) => console.error(err));
     }
@@ -28,7 +28,7 @@ const Callback = () => {
 
   return (
     <div className="container">
-      <h1>Redirecting to Following...</h1>
+      <h1>Redirecting to Follows...</h1>
     </div>
   );
 };
