@@ -87,11 +87,31 @@ div.follows-page {
     &-bar {
       display: flex;
       justify-content: space-around;
-      padding-top: 1em;
+      padding: 1em 0;
       border-top: 1px solid rgb(239, 243, 244);
+      border-bottom: 1px solid rgb(239, 243, 244);
 
       & button {
         padding: 0.5em;
+      }
+    }
+
+    &-reply {
+      padding-top: 0.5em;
+
+      & textarea {
+        width: 100%;
+      }
+
+      &-bar {
+        display: flex;
+        justify-content: center;
+        gap: 1em;
+        padding-top: 0.5em;
+
+        & button {
+          padding: 0.5em;
+        }
       }
     }
   }
