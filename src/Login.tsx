@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 const Login = () => {
   const [authUrl, setAuthUrl] = useState("");
   const getAuthUrl = () => {
-    fetch(`${process.env.REACT_APP_BASE_URL}/authorize`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/auth/authorize`)
       .then((res) => res.json())
       .then(({ data }) => {
         setAuthUrl(data);

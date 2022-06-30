@@ -32,10 +32,13 @@ const Follows = () => {
     if (!token) return null;
 
     try {
-      const req = await fetch(`${process.env.REACT_APP_BASE_URL}/follows`, {
-        method: "GET",
-        headers: { Authorization: token },
-      });
+      const req = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/user/follows`,
+        {
+          method: "GET",
+          headers: { Authorization: token },
+        }
+      );
 
       const { data } = (await req.json()) as {
         status: boolean;

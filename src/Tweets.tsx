@@ -13,6 +13,7 @@ type TweetObj = {
   id: string;
   text: string;
   reply: boolean;
+  attachement_urls?: string[];
 };
 type TweetsApiResp = {
   status: boolean;
@@ -65,7 +66,7 @@ const Tweets = () => {
 
     try {
       const req = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/tweets/${userId}`,
+        `${process.env.REACT_APP_BASE_URL}/user/tweets/${userId}`,
         {
           method: "GET",
           headers: { Authorization: token },
@@ -181,9 +182,16 @@ const Tweets = () => {
     <div className="tweets-page">
       <h1>Tweets</h1>
       <div className="tweets-grid">
-        {tweets.map(({ id, text, reply }) => (
+        {tweets.map(({ id, text, reply, attachement_urls }) => (
           <div className="tweets-grid__item" id={id}>
             <p>{text}</p>
+            {attachement_urls && (
+              <div className="tweets-grid__item-img">
+                {attachement_urls.map((src) => (
+                  <img key={src} src={src} alt="" />
+                ))}
+              </div>
+            )}
             <div className="tweets-grid__item-bar">
               <button onClick={() => retweetTweet(id)}>Retweet</button>
               <button onClick={() => likeTweet(id)}>Like</button>
