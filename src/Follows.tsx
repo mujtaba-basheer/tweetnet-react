@@ -26,6 +26,7 @@ type FollowsApiResp = {
 const Follows = () => {
   const navigate = useNavigate();
   const [follows, setFollows] = useState<FollowObj[]>([]);
+  const [token, setToken] = useState<string>("");
 
   const getFollows = async (token: string) => {
     if (!token) return null;
@@ -41,7 +42,8 @@ const Follows = () => {
 
       if (req.status === 401) {
         const new_token = await refreshToken();
-        getFollows(new_token);
+        setToken(new_token);
+        return;
       }
 
       const { data } = (await req.json()) as {
@@ -58,10 +60,12 @@ const Follows = () => {
     const tokenObj: TokenObj = JSON.parse(
       localStorage.getItem("token") || "null"
     );
-    if (tokenObj) {
-      getFollows(tokenObj.access_token);
-    } else navigate("/login");
+    if (!tokenObj) navigate("/login");
   }, [navigate]);
+
+  useEffect(() => {
+    if (token) getFollows(token);
+  }, [token]);
 
   return (
     <div className="follows-page">
