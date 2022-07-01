@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 type TokenObj = {
-  token: {
-    access_token: string;
-    expires_in: number;
-    scope: string;
-    token_type: string;
-  };
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+  scope: string;
+  token_type: string;
 };
 type TweetObj = {
   id: string;
@@ -173,8 +172,8 @@ const Tweets = () => {
       sessionStorage.getItem("token") || "null"
     );
     if (tokenObj && params.id) {
-      setToken(tokenObj.token.access_token);
-      getTweets(params.id, tokenObj.token.access_token);
+      setToken(tokenObj.access_token);
+      getTweets(params.id, tokenObj.access_token);
     } else navigate("/login");
   }, [navigate, params.id]);
 

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { refreshToken } from "./utils/refresh-token";
 
 type TokenObj = {
-  token: {
-    access_token: string;
-    expires_in: number;
-    scope: string;
-    token_type: string;
-  };
+  access_token: string;
+  expires_in: number;
+  scope: string;
+  token_type: string;
 };
 
 type FollowObj = {
@@ -36,9 +35,14 @@ const Follows = () => {
         `${process.env.REACT_APP_BASE_URL}/user/follows`,
         {
           method: "GET",
-          headers: { Authorization: token },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
+
+      if (req.status === 401) {
+        const new_token = await refreshToken();
+        getFollows(new_token);
+      }
 
       const { data } = (await req.json()) as {
         status: boolean;
@@ -52,10 +56,10 @@ const Follows = () => {
 
   useEffect(() => {
     const tokenObj: TokenObj = JSON.parse(
-      sessionStorage.getItem("token") || "null"
+      localStorage.getItem("token") || "null"
     );
     if (tokenObj) {
-      getFollows(tokenObj.token.access_token);
+      getFollows(tokenObj.access_token);
     } else navigate("/login");
   }, [navigate]);
 

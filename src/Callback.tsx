@@ -20,7 +20,7 @@ const Callback = () => {
       })
         .then((res) => res.json())
         .then(({ data }) => {
-          sessionStorage.setItem("token", JSON.stringify(data));
+          localStorage.setItem("token", JSON.stringify(data));
           setToken(data.access_token);
           setTimeout(() => navigate("/follows"), 10000);
         })
