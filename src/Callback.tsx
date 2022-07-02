@@ -13,7 +13,7 @@ const Callback = () => {
     } else {
       fetch(`${process.env.REACT_APP_BASE_URL}/auth/token`, {
         method: "POST",
-        body: JSON.stringify({ code, mid: "62bda0b3945ec700049f88b0" }),
+        body: JSON.stringify({ code, mid: "62bfe94849f91800040ae75a" }),
         headers: {
           "Content-Type": "application/json",
         },

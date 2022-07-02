@@ -60,7 +60,8 @@ const Follows = () => {
     const tokenObj: TokenObj = JSON.parse(
       localStorage.getItem("token") || "null"
     );
-    if (!tokenObj) navigate("/login");
+    if (tokenObj) setToken(tokenObj.access_token);
+    else navigate("/login");
   }, [navigate]);
 
   useEffect(() => {

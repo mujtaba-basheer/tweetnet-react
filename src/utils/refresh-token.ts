@@ -11,7 +11,7 @@ export const refreshToken: () => Promise<string> = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer 62bda0b3945ec700049f88b0.${tokenObj.access_token}`,
+        Authorization: `Bearer ${tokenObj.access_token}`,
       },
       body: JSON.stringify({
         token: {
