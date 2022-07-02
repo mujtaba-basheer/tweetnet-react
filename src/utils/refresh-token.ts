@@ -24,8 +24,8 @@ export const refreshToken: () => Promise<string> = () => {
           throw new Error("Your session has expired! Please login again.");
         return resp.json();
       })
-      .then((data: TokenObj) => {
-        localStorage.setItem("token", JSON.stringify(data));
+      .then((data: { status: boolean; data: TokenObj }) => {
+        localStorage.setItem("token", JSON.stringify(data.data));
         res(data.access_token);
       })
       .catch(rej);
