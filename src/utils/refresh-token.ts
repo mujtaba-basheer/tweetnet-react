@@ -26,7 +26,7 @@ export const refreshToken: () => Promise<string> = () => {
       })
       .then((data: { status: boolean; data: TokenObj }) => {
         localStorage.setItem("token", JSON.stringify(data.data));
-        res(data.access_token);
+        res(data.data.access_token);
       })
       .catch(rej);
   });

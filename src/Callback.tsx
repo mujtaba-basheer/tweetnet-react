@@ -4,13 +4,13 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 const Callback = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState({});
   const [token, setToken] = useState("");
 
   const fetchToken = (mid: string) => {
     fetch(`${process.env.REACT_APP_BASE_URL}/auth/token`, {
       method: "POST",
-      body: JSON.stringify({ code, mid }),
+      body: JSON.stringify({ mid, ...code }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -26,8 +26,9 @@ const Callback = () => {
 
   useEffect(() => {
     const paramsCode = searchParams.get("code");
+    const paramsState = searchParams.get("state");
     if (paramsCode) {
-      setCode(paramsCode);
+      setCode({ code: paramsCode, state: paramsState });
     } else {
       navigate("/login");
     }
